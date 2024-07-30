@@ -19,4 +19,3 @@ cat /etc/passwd | grep www-data
 ```bash
 user www-data; # a user name 'www-data' uses this config for the webserver
 ```
-# learn-nginx
