@@ -1,5 +1,5 @@
 user www-data; # a user name 'www-data' uses this config for the webserver
-worker_processes auto; # 
+worker_processes auto;
 
 pid /run/nginx.pid;
 include /etc/nginx/modules-enabled/*.conf;
