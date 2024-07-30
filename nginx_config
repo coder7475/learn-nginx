@@ -1,4 +1,4 @@
-user www-data; # a user name 'www-data' uses this config for the webserver
+user www-data; 
 worker_processes auto;
 
 pid /run/nginx.pid;
