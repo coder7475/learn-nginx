@@ -1,4 +1,4 @@
-# Explanation of nginx common configurations
+# Common Configurations
 
 Config file is in nginx_config.
 
