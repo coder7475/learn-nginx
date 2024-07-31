@@ -47,3 +47,11 @@ error_log /var/log/nginx/error.log;
 ```bash
 tail -f /var/log/nginx/error.log;
 ```
+
+## Find Default Nginx Page HTML
+
+**Linux Command**
+
+```bash
+cat /usr/share/nginx/html/index.html
+```
