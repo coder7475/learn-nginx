@@ -91,3 +91,11 @@ Let’s analyze how NGINX handles some requests based on this configuration:
 3.  http://example.com/tasks.pl is requested - NGINX uses FastCGI handler to execute the file at /srv/www/example.com/public_html/tasks.pl and return the result.
 
 4.  http://example.com/username/roster.pl is requested - NGINX uses FastCGI handler to execute the file at /srv/www/example.com/public_html/username/roster.pl and return the result.
+
+## Reverse Proxy
+
+A reverse proxy accepts requests from clients and forwards the request to servers for the actual processing. The reverse proxy relays the results from servers to the client.
+
+## Load Balancer
+
+A load balancer distributes client requests among a group of backend servers and then relays the response from the selected server to the appropriate client.
