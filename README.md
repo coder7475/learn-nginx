@@ -113,3 +113,134 @@ A load balancer distributes client requests among a group of backend servers and
 - Load balancers enhance the _user experience_ by **reducing the number of error responses** for clients either by detecting when one of the backend servers goes down and **diverting requests** away from that server to the other servers in the backend pool or by allowing an application health check.
 
 - Load balancer makes sense when we have **multiple backend servers** because it often makes sense to deploy a reverse proxy even with just one web server or application server.
+
+## NGINX Configuration of Reverse Proxy
+
+NGINX reverse proxy acts as an intermediate proxy that takes a client request and passes it to the servers. From load balancing, increased security to higher performance - it is used for a range of use cases.
+
+To get started with configuring a reverse proxy, follow these steps:
+
+1. If not already installed, install NGINX:
+
+```bash
+  sudo apt update
+  sudo apt install nginx
+```
+
+2. Deactivate your virtual host. To deactivate your virtual host run
+
+```bash
+   unlink /etc/nginx/sites-enabled/default
+```
+
+3. Change your directory to _/sites-available_ and create a reverse proxy there:
+
+```bash
+   cd /etc/nginx/sites-available
+   nano reverse-proxy.conf
+```
+
+4. Configure proxy server to redirect all requests on port 80 to a lightweight http server that listens to port 8000. To do that, write the following Nginx configuration:
+
+```bash
+  server {
+    listen 80;
+    listen [::]:80;
+
+    access_log /var/log/nginx/reverse-access.log;
+    error_log /var/log/nginx/reverse-error.log;
+
+    location / {
+      proxy_pass http://127.0.0.1:8000;
+    }
+  }
+```
+
+5. Use the symbolic link and copy configuration from /etc/nginx/sites-available to /etc/nginx/sites-enabled:
+
+```bash
+  ln -s /etc/nginx/sites-available/reverse-proxy.conf /etc/nginx/sites-enabled/reverse-proxy.conf
+```
+
+6. Verify if NGINX is working:
+
+```bash
+  nginx -t
+```
+
+If you see a successful test message, NGINX reverse proxy is properly configured on your system.
+
+# Configuring Load Balance with NGINX
+
+We assume that you already have NGINX installed. If not, follow the steps from the previous section. To configure your NGINX and use it as a load balancer, add your backend servers to your configuration file first. Collect your server IPs that acts as load balancers:
+
+File: load_balancer.conf
+1
+2
+3
+4
+5
+6
+7
+8
+upstream backend {
+server 72.229.28.185;
+server 72.229.28.186;
+server 72.229.28.187;
+server 72.229.28.188;
+server 72.229.28.189;
+server 72.229.28.190;
+}
+After upstream servers are defined, go to the location /etc/nginx/sites-available/ and edit load_balancer.conf.
+
+File: /etc/nginx/sites-available/load_balancer.conf
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+upstream backend {
+server 72.229.28.185;
+server 72.229.28.186;
+server 72.229.28.187;
+server 72.229.28.188;
+server 72.229.28.189;
+server 72.229.28.190;
+}
+server {
+listen 80;
+server_name SUBDOMAIN.DOMAIN.TLD;
+location / {
+proxy_set_header Host $host;
+proxy_set_header X-Real-IP $remote_addr;
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+proxy_pass https://backend;
+
+}
+}
+Every time a request is made to port 80 to SUBDOMAIN.DOMAIN.LTD, request is routed to upstream servers.
+
+After done, execute this new configuration by reloading NGINX using
+
+nginx -t
+cd /etc/nginx/site-enabled/
+ln -s ../sites-available/load_balancer.conf
+systemctl reload nginx
+You can further configure and optimize your load balancer by load balancing methods like Round Robin, Least connected, IP hash, and Weighted.
+
+```
+
+```
