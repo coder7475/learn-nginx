@@ -1,4 +1,6 @@
-# Common Configurations
+# NGINX
+
+## Common Configurations
 
 Config file is in nginx_config.
 
@@ -96,6 +98,8 @@ Let’s analyze how NGINX handles some requests based on this configuration:
 
 A reverse proxy accepts requests from clients and forwards the request to servers for the actual processing. The reverse proxy relays the results from servers to the client.
 
+_NGINX_ reverse proxy acts as an intermediate proxy that takes a client request and passes it to the servers. From load balancing, increased security to higher performance - it is used for a range of use cases.
+
 The benefits of reverse proxy are the following:
 
 - **Security**: With a reverse proxy, clients will not have information about our backend servers, so there is no way any **malicious client** cannot access them directly to **exploit any vulnerabilities**. Many reverse proxy servers provide features that help **protect backend servers** from _DDoS attacks_, _IP address blacklisting_ to _reject traffic_ from particular client IP, or _Rate Limit_, which is limiting the number of connections accepted from each client.
@@ -115,8 +119,6 @@ A load balancer distributes client requests among a group of backend servers and
 - Load balancer makes sense when we have **multiple backend servers** because it often makes sense to deploy a reverse proxy even with just one web server or application server.
 
 ## NGINX Configuration of Reverse Proxy
-
-NGINX reverse proxy acts as an intermediate proxy that takes a client request and passes it to the servers. From load balancing, increased security to higher performance - it is used for a range of use cases.
 
 To get started with configuring a reverse proxy, follow these steps:
 
@@ -170,77 +172,59 @@ To get started with configuring a reverse proxy, follow these steps:
 
 If you see a successful test message, NGINX reverse proxy is properly configured on your system.
 
-# Configuring Load Balance with NGINX
+## Configuring Load Balance with NGINX
 
-We assume that you already have NGINX installed. If not, follow the steps from the previous section. To configure your NGINX and use it as a load balancer, add your backend servers to your configuration file first. Collect your server IPs that acts as load balancers:
+To configure your NGINX and use it as a load balancer:
 
-File: load_balancer.conf
-1
-2
-3
-4
-5
-6
-7
-8
+1. Add your backend servers to your configuration file first. Collect your server IPs that acts as load balancers:
+
+```bash
+# File: load_balancer.conf
 upstream backend {
-server 72.229.28.185;
-server 72.229.28.186;
-server 72.229.28.187;
-server 72.229.28.188;
-server 72.229.28.189;
-server 72.229.28.190;
+  server 72.229.28.185;
+  server 72.229.28.186;
+  server 72.229.28.187;
+  server 72.229.28.188;
+  server 72.229.28.189;
+  server 72.229.28.190;
 }
-After upstream servers are defined, go to the location /etc/nginx/sites-available/ and edit load_balancer.conf.
+```
 
-File: /etc/nginx/sites-available/load_balancer.conf
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
+2. After upstream servers are defined, go to the location /etc/nginx/sites-available/ and edit load_balancer.conf.
+
+```bash
+# File: /etc/nginx/sites-available/load_balancer.conf
+
 upstream backend {
-server 72.229.28.185;
-server 72.229.28.186;
-server 72.229.28.187;
-server 72.229.28.188;
-server 72.229.28.189;
-server 72.229.28.190;
+  server 72.229.28.185;
+  server 72.229.28.186;
+  server 72.229.28.187;
+  server 72.229.28.188;
+  server 72.229.28.189;
+  server 72.229.28.190;
 }
+
 server {
-listen 80;
-server_name SUBDOMAIN.DOMAIN.TLD;
-location / {
-proxy_set_header Host $host;
-proxy_set_header X-Real-IP $remote_addr;
-proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-proxy_pass https://backend;
+    listen 80;
+    server_name SUBDOMAIN.DOMAIN.TLD;
+    location / {
+      proxy_set_header Host $host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_pass https://backend;
+    }
+}
+```
 
-}
-}
 Every time a request is made to port 80 to SUBDOMAIN.DOMAIN.LTD, request is routed to upstream servers.
 
-After done, execute this new configuration by reloading NGINX using
+3. Execute this new configuration by reloading NGINX using
 
-nginx -t
-cd /etc/nginx/site-enabled/
-ln -s ../sites-available/load_balancer.conf
-systemctl reload nginx
-You can further configure and optimize your load balancer by load balancing methods like Round Robin, Least connected, IP hash, and Weighted.
-
+```bash
+  nginx -t
+  cd /etc/nginx/site-enabled/
+  ln -s ../sites-available/load_balancer.conf
+  systemctl reload nginx
 ```
 
-```
+You can further **configure and optimize** your load balancer by load balancing methods like _Round Robin_, _Least connected_, _IP hash_, and _Weighted_.
