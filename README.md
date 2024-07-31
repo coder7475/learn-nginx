@@ -1,8 +1,10 @@
 # Explanation of nginx common configurations
 
-Config file is in nginx_config. All empty lines are skipped.
+Config file is in nginx_config.
 
-## First Line
+Default Config in /conf.d/default.conf.
+
+## User
 
 ```bash
 user www-data; # a user name 'www-data' uses this config for the webserver
@@ -14,7 +16,7 @@ user www-data; # a user name 'www-data' uses this config for the webserver
 cat /etc/passwd | grep www-data
 ```
 
-## Second Line
+## Worker
 
 ```bash
 worker_processes auto; # how many worker process runs for nginx in the background
@@ -28,13 +30,13 @@ Nginx recommends setting the worker process to number of cores available
 cat /proc/cpuinfo | grep cores
 ```
 
-## Fourth Line
+## PID
 
 ```bash
 pid /run/nginx.pid;
 ```
 
-## Forty One
+## Error Logs
 
 ```bash
 error_log /var/log/nginx/error.log;
