@@ -96,6 +96,14 @@ Let’s analyze how NGINX handles some requests based on this configuration:
 
 A reverse proxy accepts requests from clients and forwards the request to servers for the actual processing. The reverse proxy relays the results from servers to the client.
 
+The benefits of reverse proxy are the following:
+
+- **Security**: With a reverse proxy, clients will not have information about our backend servers, so there is no way any **malicious client** cannot access them directly to **exploit any vulnerabilities**. Many reverse proxy servers provide features that help **protect backend servers** from _DDoS attacks_, _IP address blacklisting_ to _reject traffic_ from particular client IP, or _Rate Limit_, which is limiting the number of connections accepted from each client.
+
+- **Optimized SSL Encryption/Decryption**: Implementing SSL/TLS can significantly impact backend server performance because the **SSL handshake** and **encrypting/decrypting** operation for each request is quite **CPU-intensive**.
+
+- **Scalability and high availability**: Along with **load balancing**, the reverse proxy allows to **scale/ add/remove servers** to backend pool based on traffic volume as clients see only the reverse proxy’s IP address. This makes you achieve high availability for your websites/API.
+
 ## Load Balancer
 
 A load balancer distributes client requests among a group of backend servers and then relays the response from the selected server to the appropriate client.
