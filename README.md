@@ -99,3 +99,9 @@ A reverse proxy accepts requests from clients and forwards the request to server
 ## Load Balancer
 
 A load balancer distributes client requests among a group of backend servers and then relays the response from the selected server to the appropriate client.
+
+- Load balancers help to eliminate a **single point of failure**, making the website/API more reliable by allowing the website/API to be deployed in multiple backend servers.
+
+- Load balancers enhance the _user experience_ by **reducing the number of error responses** for clients either by detecting when one of the backend servers goes down and **diverting requests** away from that server to the other servers in the backend pool or by allowing an application health check.
+
+- Load balancer makes sense when we have **multiple backend servers** because it often makes sense to deploy a reverse proxy even with just one web server or application server.
