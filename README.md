@@ -90,11 +90,32 @@ A single instance of nginx can be configured to :
 - Process ID (PID)
 - Log file Location
 
-### Events Context
+#### Events Context
 
 **Contains Connection processing directives**:
 
 - Number of connections per worker process
+
+#### HTTP Context
+
+**Determines how NGINX handles HTTP & HTTPS connections**:
+
+- Address of pool of back end servers
+
+##### Server Context
+
+**Define virtual server that responds to a request for:**
+
+- Domain name
+- IP address
+- Unix Socket
+
+##### Location Context
+
+**Defines how NGINX responds to an HTTP request based on requested URI:**
+
+- Point to Point Matching
+- String Matching
 
 ## Common Configurations
 
