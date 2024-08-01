@@ -1,5 +1,19 @@
 # NGINX
 
+## Use Cases
+
+A single instance of nginx can be configured to :
+
+1. Web Server
+2. Reverse Proxy
+3. Load Balancer
+4. Cache
+5. Web Application Firewall
+6. Internal DDOS Protection
+7. API Gateway
+8. K8s IC
+9. Sidecar Proxy
+
 ## Common Configurations
 
 Config file is in nginx_config.
