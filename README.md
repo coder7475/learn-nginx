@@ -375,3 +375,5 @@ Every time a request is made to port 80 to SUBDOMAIN.DOMAIN.LTD, request is rout
 ```
 
 You can further **configure and optimize** your load balancer by load balancing methods like _Round Robin_, _Least connected_, _IP hash_, and _Weighted_.
+
+**Note**: For more configuration follow: https://www.linode.com/docs/guides/how-to-configure-nginx/
