@@ -81,6 +81,21 @@ A single instance of nginx can be configured to :
                  |_____|Upstream|
 ```
 
+### Main Context
+
+**Highest Level Directives**:
+
+- Number of worker processes
+- Linux Username
+- Process ID (PID)
+- Log file Location
+
+### Events Context
+
+**Contains Connection processing directives**:
+
+- Number of connections per worker process
+
 ## Common Configurations
 
 Config file is in nginx_config.
