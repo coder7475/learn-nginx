@@ -117,6 +117,15 @@ A single instance of nginx can be configured to :
 - Point to Point Matching
 - String Matching
 
+##### Upstream Context
+
+**Defines a group of backend servers:**
+
+- Application Servers
+- Web Servers
+
+This is essentially for load balancing use case.
+
 ## Common Configurations
 
 Config file is in nginx_config.
