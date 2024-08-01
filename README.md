@@ -133,6 +133,20 @@ This is essentially for load balancing use case.
 - UDP
 - TCP
 
+## NGINX Config: Directives & Blocks
+
+The location of all NGINX configuration files is in the /etc/nginx/ directory. The primary NGINX configuration file is /etc/nginx/nginx.conf.
+
+To set NGINX configurations, use:
+
+1. **Directives** - a statement that controls NGINX Behavior. NGINX configuration options. They tell NGINX to process actions or know a certain variable, such as where to log errors.
+
+2. **Blocks** (also known as _contexts_) - Groups in which Directives are organized
+
+Note that any character after **#** in a line becomes a comment. And NGINX does not interpret it.
+
+**For More about configuration contexts Follow:** https://www.digitalocean.com/community/tutorials/understanding-the-nginx-configuration-file-structure-and-configuration-contexts
+
 ## Common Configurations
 
 Config file is in nginx_config.
