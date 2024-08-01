@@ -126,6 +126,13 @@ A single instance of nginx can be configured to :
 
 This is essentially for load balancing use case.
 
+#### Stream Context
+
+**Defines handling of Layer 3 and Layer 4 traffic**:
+
+- UDP
+- TCP
+
 ## Common Configurations
 
 Config file is in nginx_config.
