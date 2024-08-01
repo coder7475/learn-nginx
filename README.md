@@ -14,6 +14,73 @@ A single instance of nginx can be configured to :
 8. K8s IC
 9. Sidecar Proxy
 
+## Basic Commands
+
+- Check NGINX version
+
+```bash
+   nginx -v
+```
+
+- Check Configuration file syntax before reloading
+
+```bash
+   nginx -t
+```
+
+- Display Current Configuration
+
+```bash
+  nginx -T
+```
+
+- Reload NGINX
+
+```bash
+  nginx -s reload
+```
+
+## Default location of NGINX configuration
+
+- Main File
+
+```bash
+    /etc/nginx/nginx.conf
+```
+
+- Includes
+
+```bash
+    /etc/nginx/conf.d/*.conf
+```
+
+## Configuration Contexts
+
+**Each NGINX configuration has:**
+
+- One Main Main Context
+- One HTTP Context
+
+```bash
+# Overview
+|Main |
+      |___|Events|
+      |
+      |___|HTTP|
+      |        |
+      |        |____|Server|
+      |        |           |_______|Location|
+      |        |
+      |        |____|Upstream|
+      |
+      |
+      |___|Stream|
+                 |
+                 |_____|Server|
+                 |
+                 |_____|Upstream|
+```
+
 ## Common Configurations
 
 Config file is in nginx_config.
