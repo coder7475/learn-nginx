@@ -67,6 +67,28 @@ After verifying syntax is correct always reload nginx. Command:
   sudo nginx -s reload
 ```
 
+## Troubleshooting with `systemctl status nginx`
+
+Always verify if nginx service is active and working on your system. Use `systemd` init system:
+
+```bash
+  systemctl status nginx
+```
+
+If your service is running, it will read as `active (running)` in output.
+
+If your service is not running, it will read as `inactive (dead)` in the output. If that happens restart Nginx service:
+
+```bash
+  sudo systemctl restart nginx
+```
+
+Verify if it has restarted with:
+
+```bash
+  systemctl status nginx
+```
+
 ### References
 
 - https://www.digitalocean.com/community/tutorials/how-to-troubleshoot-common-nginx-errors?ref=dailydev
