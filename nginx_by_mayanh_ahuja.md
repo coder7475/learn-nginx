@@ -80,7 +80,7 @@ Remember,
 ◾ Nginx performance can be impacted by long-running requests that block the event loop.
 ◾ For computationally intensive tasks, Nginx may benefit from using threads or offloading work to external processes. 😊
 
-### Post Reference
+### Reference
 
 - https://www.linkedin.com/feed/update/urn:li:activity:7225758044226281472/
-s
+  s
