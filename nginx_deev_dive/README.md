@@ -8,6 +8,8 @@
 
 - Instructor: **Keith Thompson**
 
+- Course Of: Linux Academy
+
 ## Prerequisite
 
 - Know Linux System
