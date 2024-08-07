@@ -14,6 +14,12 @@ A single instance of nginx can be configured to :
 8. K8s IC
 9. Sidecar Proxy
 
+## Installation
+
+- **Official Linux Installation**: https://nginx.org/en/linux_packages.html
+
+- Doc: https://docs.chaicode.com/server-setup/
+
 ## Basic Commands
 
 - Check NGINX version
