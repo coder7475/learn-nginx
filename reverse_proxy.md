@@ -28,7 +28,7 @@ Nginx uses proxy_pass directory to pass the request to 'example.com' to another 
 
 ## Forward client details to backend server via reverse proxy
 
-## Redefining Request Headers
+One need to Redefining Request Headers and forward it to backend server. To redefine request header use `proxy_set_header`.
 
 ### Use proxy_set_header
 
@@ -51,3 +51,4 @@ Nginx uses proxy_pass directory to pass the request to 'example.com' to another 
 
 - https://www.youtube.com/watch?v=PEOzUckp8CI&list=PLHXG_yQQf1HVFWNsZyxIASDCJMjkRUWuR&index=7
 - https://www.youtube.com/watch?v=lZVAI3PqgHc&list=PLHXG_yQQf1HVFWNsZyxIASDCJMjkRUWuR&index=9&t=19s
+- https://nginx.org/en/docs/http/websocket.html
