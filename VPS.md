@@ -16,8 +16,56 @@
 ## **Different types of web hosting services available**
 
 - **Shared hosting** is when multiple users share a single physical server and all of its resources. However, you are not allocated a set amount of resources, meaning your website’s computing power and memory can be affected by the needs of other users.
+
 - **Dedicated hosting**, on the hand, provides an entire physical server and all of its resources are reserved for your business alone. You get full control over everything, from hardware to operating system to custom server software.
+
 - **VPS hosting** sits at the midpoint between shared hosting and dedicated hosting. Unlike shared hosting, you get a defined amount of resources allocated to your VPS. Plus, you can enjoy many advantages of dedicated hosting for a more affordable price, including your own OS, server applications, and root access control
+
+### Advantage and Disadvantages of Different Types of hosting
+
+1. Shared Hosting
+
+In shared hosting, each customer has to share space and resources on the server with every other customer, including CPU time, memory and disk space.
+
+**Advantages:**
+
+- Cheap
+- No technical skill required
+- Security, upgrades and maintenance managed for you
+
+**Disadvantages:**
+
+- Slow
+- Security at risk
+- Limited Software Application - only provide php, wordpress most of the time
+- Small Business
+
+2. VPS Hosting
+
+VPS (Virtual Private Server) is a hosting service that uses virtualization technology to provide you with dedicated (private) resources on a server with multiple users
+
+**Properties**
+
+- Affordable but expensive than shared hosting
+- Need Technical Skill
+- More Secure than shared hosting
+- fast and scalable
+- root access and install any software
+- Suitable for Both Small and Mid Business
+
+3. Dedicated Server Hosting
+
+A dedicated server is a server that is fully dedicated to one user who has the right to all resources available whole server.
+
+**Properties**
+
+- Expensive
+- Requires Technical Skill
+- Most Secure
+- Fast
+- Full Access to all settings and Customization
+- High Performance
+- Large Business
 
 ## Types of VPS hosting
 
@@ -38,3 +86,9 @@
      Monitors for early warning signs of hardware failure and malicious attack
    - **Automated backups**
      In the event anything goes wrong with your site, you can retrieve it back to an earlier version.
+
+## Further Reading
+
+[What is VPS? - VPS Hosting and Server Explained - AWS](https://aws.amazon.com/what-is/vps/)
+
+[What Is VPS: Complete Guide to Virtual Private Servers](https://www.hostinger.com/tutorials/what-is-vps-hosting)
