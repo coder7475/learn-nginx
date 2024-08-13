@@ -1,4 +1,4 @@
-# Basic Example Config to get started
+code # Basic Example Config to get started
 
 ```bash
 // /etc/nginx/conf.d/file_name.conf
