@@ -25,8 +25,13 @@ A reverse proxy sits in front of a server and can
 
 Nginx uses `proxy_pass` Directive for configuring reverse proxy.
 
-- Syntax: proxy_pass <destination>
-- Request: https://www.example.com
+- Syntax:
+
+```bash
+proxy_pass <destination>
+```
+
+- Example:
 
 ```bash
   location / {
@@ -34,7 +39,7 @@ Nginx uses `proxy_pass` Directive for configuring reverse proxy.
   }
 ```
 
-Nginx uses proxy_pass directory to pass the request to 'example.com' to another server with ip address of `10.1.1.3:9000`.
+Nginx uses proxy_pass directory to pass the request to another server with ip address of `10.1.1.3:9000`.
 
 **Important**: When nginx starts connection with another server(backend) with proxy pass. It **closes** the previous connection with the client which results in some request information is **lost**. So one should **capture** the original details like actual ip address of client, host details etc and **forward** to the backend server.
 
@@ -44,14 +49,20 @@ One need to Redefining Request Headers and forward it to backend server. To rede
 
 ### Use proxy_set_header
 
-- **Syntax**: proxy_set_header <HTTP request header field_name> <new_value>;
+- **Syntax**:
+
+```bash
+proxy_set_header <HTTP request header field_name> <new_value>;
+```
+
+- Example of reverse proxy config:
 
 ```bash
   server {
     listen 80;
-    proxy_set_header Host $host; # replaces host header that comes from client
-    proxy_set_header X-Real-IP $remote_addr; # captures original ip address of requester and sends it to backend
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; # all the traverse route the request takes
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr; nd
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 
     location / {
       proxy_pass http://10.1.1.3:9000/app1
