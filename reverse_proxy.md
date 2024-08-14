@@ -58,16 +58,78 @@ proxy_set_header <HTTP request header field_name> <new_value>;
 - Example of reverse proxy config:
 
 ```bash
+  // /etc/nginx/sites-available/your_domain
   server {
     listen 80;
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr; nd
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    listen [::]:80;
+
+    server_name your_domain www.your_domain;
 
     location / {
-      proxy_pass http://10.1.1.3:9000/app1
+      proxy_pass http://your_server_address;
+      include proxy_params;
     }
   }
+```
+
+- This is proxy params:
+
+```bash
+   // /etc/nginx/proxy_param
+
+    proxy_set_header Host $http_host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+
+    # For JWT token
+    proxy_set_header Authorization $http_authorization;
+    # Web sockets if needed
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+```
+
+Handling CORS:
+
+```bash
+const cors = require('cors');
+
+app.use(cors({
+  origin: 'http://your-frontend-domain.com',
+  credentials: true, // Allow cookies and JWT tokens to be sent
+  allowedHeaders: 'Authorization, Content-Type'
+}));
+```
+
+configure SSL:
+
+```bash
+  server {
+    listen 443 ssl;
+    server_name your-domain.com;
+
+    ssl_certificate /etc/letsencrypt/live/your-domain.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/your-domain.com/privkey.pem;
+
+    location /api/ {
+        proxy_pass http://your-express-server:your-express-port;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+
+        proxy_set_header Authorization $http_authorization;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+    }
+}
+
+server {
+    listen 80;
+    server_name your-domain.com;
+    return 301 https://$host$request_uri;
+}
+
 ```
 
 ## References
