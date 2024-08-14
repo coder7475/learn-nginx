@@ -1,13 +1,25 @@
-# Nginx as Reverse Proxy
+## Set Nginx as Reverse Proxy in Ubuntu
 
-## Reverse Proxy
+- A reverse proxy is the recommended method to expose an application backend server to the internet
+
+- From a client’s perspective, interacting with a reverse proxy is no different from interacting with the application server directly.
+
+#### Benefits of Reverse proxy
+
+- Security benefits in isolating the application server from direct internet access
+
+- The ability to centralize firewall protection
+
+- a minimized attack plane for common threats such as denial of service(DDos) attacks.
+
+## What can Reverse Proxy Do?
 
 A reverse proxy sits in front of a server and can
 
-- Act as Load Balancer
 - Protect the origin servers from attacks by hiding it's IP addresses
 - Cache content for faster performance
 - Provide SSL encryption and decryption to and from the server
+- Act as Load Balancer
 
 ## Directive Needed
 
@@ -50,5 +62,9 @@ One need to Redefining Request Headers and forward it to backend server. To rede
 ## References
 
 - https://www.youtube.com/watch?v=PEOzUckp8CI&list=PLHXG_yQQf1HVFWNsZyxIASDCJMjkRUWuR&index=7
+
 - https://www.youtube.com/watch?v=lZVAI3PqgHc&list=PLHXG_yQQf1HVFWNsZyxIASDCJMjkRUWuR&index=9&t=19s
+
 - https://nginx.org/en/docs/http/websocket.html
+
+- https://www.digitalocean.com/community/tutorials/how-to-configure-nginx-as-a-reverse-proxy-on-ubuntu-22-04
