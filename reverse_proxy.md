@@ -132,6 +132,37 @@ server {
 
 ```
 
+### Add Caching
+
+```bash
+  http {
+    # Define caching path and zone
+    proxy_cache_path /path/to/cache levels=1:2 keys_zone=my_cache:10m max_size=10g inactive=60m;
+
+    # Define proxy settings
+    proxy_cache my_cache;
+    proxy_cache_valid 200 302 10m; # Cache successful responses for 10 minutes
+    proxy_cache_valid 404      1m; # Cache 404 errors for 1 minute
+    proxy_cache_use_stale error timeout updating http_500 http_502 http_503 http_504;
+
+    server {
+        listen 80;
+
+        # Proxy requests to the upstream server
+        location / {
+            proxy_pass http://your_upstream_server;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_cache_bypass $http_upgrade;
+
+            # Enable caching for this location
+            proxy_cache my_cache;
+            proxy_cache_key $scheme$proxy_host$request_uri$is_args$args;
+        }
+    }
+}
+```
+
 ## References
 
 - https://www.youtube.com/watch?v=PEOzUckp8CI&list=PLHXG_yQQf1HVFWNsZyxIASDCJMjkRUWuR&index=7
@@ -141,3 +172,5 @@ server {
 - https://nginx.org/en/docs/http/websocket.html
 
 - https://www.digitalocean.com/community/tutorials/how-to-configure-nginx-as-a-reverse-proxy-on-ubuntu-22-04
+
+- https://betterstack.com/community/questions/how-to-setup-nginx-as-caching-reverse-proxy/
